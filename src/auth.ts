@@ -1,7 +1,9 @@
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth"
 import { Provider } from "next-auth/providers"
 import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
+import { prisma } from "./prisma";
 
 const providers: Provider[] = [Google, GitHub];
 
@@ -17,8 +19,28 @@ export const providerMap = providers
   .filter((provider) => provider.id !== 'credentials')
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers,
   pages: {
     signIn: "/signin",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.email = token.email as string;
+      }
+      return session;
+    },
   },
 })
