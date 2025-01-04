@@ -1,7 +1,14 @@
+import { auth } from '@/auth'
+import CreatedLinksTable from '@/components/CreatedLinkTable'
+import FeatureList from '@/components/FeatureList'
+import Footer from '@/components/Footer'
 import ShortUrlForm from '@/components/ShortUrlForm'
 import { Sparkles } from 'lucide-react'
 
 export default function Home() {
+
+  const session = auth();
+
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 overflow-hidden">
       {/* Hero Section */}
@@ -42,7 +49,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-800 rounded-lg filter blur-xl opacity-50 transform -skew-y-3"></div>
             {/* Table container */}
             <div className="relative bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 table-container">
-              {/* <CreatedLinksTable /> */}
+              <CreatedLinksTable />
             </div>
           </div>
         </div>
@@ -54,14 +61,14 @@ export default function Home() {
           <h2 className="text-3xl font-extrabold text-center text-white mb-12">
             Powerful Features for Your Links
           </h2>
-          {/* <FeatureList /> */}
+          <FeatureList />
         </div>
         {/* Add a decorative element */}
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-indigo-900 to-transparent opacity-20"></div>
       </div>
 
       {/* Footer */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
