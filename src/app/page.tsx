@@ -48,7 +48,7 @@ export default function Home() {
             {/* Gradient background for floating effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-800 rounded-lg filter blur-xl opacity-50 transform -skew-y-3"></div>
             {/* Table container */}
-            <div className="relative bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 table-container">
+            <div className="relative bg-gray-800 rounded-lg shadow-xl overflow-hidden transform transition-transform duration-300 table-container">
               <CreatedLinksTable />
             </div>
           </div>
