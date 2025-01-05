@@ -1,8 +1,8 @@
 import { auth } from '@/auth'
-import CreatedLinksTable from '@/components/CreatedLinkTable'
+import CreatedLinksTable from '@/url/components/CreatedLinkTable'
 import FeatureList from '@/components/FeatureList'
 import Footer from '@/components/Footer'
-import ShortUrlForm from '@/components/ShortUrlForm'
+import ShortUrlForm from '@/url/components/ShortUrlForm'
 import { Sparkles } from 'lucide-react'
 
 export default function Home() {

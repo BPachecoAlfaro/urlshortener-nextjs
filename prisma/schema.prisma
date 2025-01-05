@@ -11,6 +11,7 @@ model User {
   id            String          @id @default(uuid())
   name          String?
   email         String          @unique
+  password      String?
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -20,6 +21,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  urls      Url[]
 }
 
 model Account {
@@ -75,4 +77,17 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
+}
+
+model Url {
+  id          String    @id @default(uuid())
+  originalUrl String
+  shortUrl    String
+  clicks      Int       @default(0)
+  createdAt   DateTime  @default(now())
+  expiredAt   DateTime?
+  isActive    Boolean   @default(true)
+  tags        String[]
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
 }

@@ -1,5 +1,5 @@
 
-import { LoginForm } from "@/components/LoginForm"
+import { LoginForm } from "@/auth/components/LoginForm"
 
 type SearchParams = { callbackUrl: string | string[] | undefined }
 
