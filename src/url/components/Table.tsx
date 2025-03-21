@@ -3,6 +3,8 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Copy, ExternalLink, Trash } from 'lucide-react'
+import { useState } from "react";
+import { deleteUrlById } from "../actions/url-actions";
 
 export interface LinksTable {
 	id: string;
@@ -11,11 +13,18 @@ export interface LinksTable {
 	clicks: number;
 }
 
+const copyToClipboard = (url: string) => {
+	navigator.clipboard.writeText(url)
+	// You might want to add a notification here
+}
+
 export const TableLinks = ({ linksTable }: { linksTable: LinksTable[] }) => {
 
-	const copyToClipboard = (url: string) => {
-		navigator.clipboard.writeText(url)
-		// You might want to add a toast notification here
+	const [table, setTable] = useState(linksTable);
+
+	const removeLink = (id: string) => {
+		setTable(linksTable => linksTable.filter(link => link.id !== id));
+		deleteUrlById(id);
 	}
 
 	return (
@@ -30,7 +39,7 @@ export const TableLinks = ({ linksTable }: { linksTable: LinksTable[] }) => {
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{linksTable.map((link) => (
+					{table.map((link) => (
 						<TableRow key={link.id}>
 							<TableCell className="font-medium truncate max-w-[300px]">{link.originalUrl}</TableCell>
 							<TableCell>{link.shortUrl}</TableCell>
@@ -55,7 +64,7 @@ export const TableLinks = ({ linksTable }: { linksTable: LinksTable[] }) => {
 								<Button
 									variant="ghost"
 									size="icon"
-									onClick={() => console.log('asdasd')}
+									onClick={() => removeLink(link.id)}
 									className="text-gray-400 hover:text-white"
 								>
 									<Trash className="h-4 w-4" />

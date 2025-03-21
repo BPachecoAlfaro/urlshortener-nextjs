@@ -6,14 +6,14 @@ import { Input } from "@/components/ui/input"
 import { LinkIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
-import { CreateShortUrl } from '../actions/url-actions'
+import { createShortUrl } from '../actions/url-actions'
 
 export default function ShortUrlForm() {
 
 	const session = useSession();
 
-	const [url, setUrl] = useState('')
-	const [shortUrl, setShortUrl] = useState('')
+	const [url, setUrl] = useState('');
+	const [shortUrl, setShortUrl] = useState('');
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -21,8 +21,8 @@ export default function ShortUrlForm() {
 		// Aquí iría la lógica para generar la URL corta
 		const newShortUrl = `http://localhost:3000/${Math.random().toString(36).substr(2, 6)}`;
 		setShortUrl(newShortUrl);
-		CreateShortUrl(url, newShortUrl);
-		setUrl('')
+		createShortUrl(url, newShortUrl);
+		setUrl('');
 	}
 
 	return (
