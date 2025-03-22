@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Copy, ExternalLink, Trash } from 'lucide-react'
 import { useState } from "react";
 import { deleteUrlById } from "../actions/url-actions";
+import toast from "react-hot-toast";
 
 export interface LinksTable {
 	id: string;
@@ -16,6 +17,7 @@ export interface LinksTable {
 const copyToClipboard = (url: string) => {
 	navigator.clipboard.writeText(url)
 	// You might want to add a notification here
+	toast.success("Copiado al portapapeles");
 }
 
 export const TableLinks = ({ linksTable }: { linksTable: LinksTable[] }) => {
